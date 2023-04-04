@@ -7,6 +7,8 @@ To play the game, simply clone this repository to your local machine and open th
 ## How to Play
 The game board is a 3x3 grid, and each player takes turns to place their symbol ('X' or 'O') on the board. To place a symbol, enter the row and column numbers when prompted. The first player to get three symbols in a row (horizontally, vertically, or diagonally) wins the game. If all spaces on the board are filled and neither player has won, the game ends in a tie.
 
+### IF TWO PEOPLE WANT TO PLAY THEN USE player--vs--player.cs
+
 ## Contributing
 Contributions are always welcome! If you find any bugs or want to add new features to the game, feel free to submit a pull request.
 
