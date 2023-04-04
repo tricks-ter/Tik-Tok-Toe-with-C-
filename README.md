@@ -12,3 +12,5 @@ Contributions are always welcome! If you find any bugs or want to add new featur
 
 ## License
 This project is licensed under the MIT License - see the LICENSE.md file for details.
+
+                                  ```Console.log("Trickster is Awesome ")```
