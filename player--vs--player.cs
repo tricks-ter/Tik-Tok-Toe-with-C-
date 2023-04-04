@@ -9,15 +9,10 @@ namespace TicTacToe
             char[,] board = new char[3, 3]; // create 2D array to represent game board
             char player = 'X'; // start with X player
             bool gameover = false; // set gameover to false initially
+            int turns = 0; // initialize turn counter
 
             // initialize the game board with spaces
-            for (int row = 0; row < 3; row++)
-            {
-                for (int col = 0; col < 3; col++)
-                {
-                    board[row, col] = ' ';
-                }
-            }
+            ResetBoard(board);
 
             // loop until the game is over
             while (!gameover)
@@ -31,6 +26,7 @@ namespace TicTacToe
                     {
                         Console.Write(board[row, col] + " ");
                     }
+
                     Console.WriteLine();
                 }
 
@@ -47,6 +43,7 @@ namespace TicTacToe
                     Console.WriteLine("Invalid input. Please try again.");
                     continue;
                 }
+
                 if (board[rowInput, colInput] != ' ')
                 {
                     Console.WriteLine("That spot is already taken. Please try again.");
@@ -77,6 +74,37 @@ namespace TicTacToe
                 {
                     player = 'X';
                 }
+
+                turns++; // increment turn counter
+                Console.WriteLine("Number of turns: " + turns);
+
+                // check if maximum number of turns have been reached
+                if (turns == 9)
+                {
+                    Console.WriteLine("Maximum number of turns reached.");
+                    gameover = true;
+                }
+
+                // check if game is over and prompt user to play again or reset board
+                if (gameover)
+                {
+                    Console.Write("Play again? (Y/N): ");
+                    string playAgainInput = Console.ReadLine().ToUpper();
+                    if (playAgainInput == "Y")
+                    {
+                        // reset game board and turn counter
+                        ResetBoard(board);
+                        turns = 0;
+                        // reset player to X for a new game
+                        player = 'X';
+                        // set gameover to false to start a new game
+                        gameover = false;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Thanks for playing!");
+                    }
+                }
             }
         }
 
@@ -87,6 +115,7 @@ namespace TicTacToe
             for (int row = 0; row < 3; row++)
             {
                 if (board[row, 0] == player && board[row, 1] == player && board[row, 2] == player)
+
                 {
                     return true;
                 }
@@ -106,33 +135,44 @@ namespace TicTacToe
             {
                 return true;
             }
+
             if (board[0, 2] == player && board[1, 1] == player && board[2, 0] == player)
             {
                 return true;
             }
 
-            // if none of the above
-            // player has not won
             return false;
         }
 
-        // check if the game is a tie
         static bool CheckTie(char[,] board)
         {
+            // check if every spot on the board is filled
             for (int row = 0; row < 3; row++)
             {
                 for (int col = 0; col < 3; col++)
                 {
                     if (board[row, col] == ' ')
                     {
-                        // found an empty spot, game is not over
+                        // if any spot is empty, the game is not a tie
                         return false;
                     }
                 }
             }
 
-            // game board is full and no player has won, game is a tie
+            // if every spot is filled and no win condition was met, the game is a tie
             return true;
+        }
+
+        // reset the game board with empty spaces
+        static void ResetBoard(char[,] board)
+        {
+            for (int row = 0; row < 3; row++)
+            {
+                for (int col = 0; col < 3; col++)
+                {
+                    board[row, col] = ' ';
+                }
+            }
         }
     }
 }
